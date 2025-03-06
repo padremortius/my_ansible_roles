@@ -1,0 +1,10 @@
+---
+- name: Add ssh key to user
+  become: true
+  become_user: root
+  ansible.posix.authorized_key:
+    key: "{{ item.key }}"
+    user: "{{ item.user }}"
+    comment: "{{ item.comment }}"
+    manage_dir: true
+  with_items: "{{ ansible_ssh_keys }}"

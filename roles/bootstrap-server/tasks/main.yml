@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for bootstrap-server
+- name: Add new ansible user
+  ansible.builtin.import_tasks: add-ansible-user.yml
+
+- name: Add system user to sudoers
+  ansible.builtin.import_tasks: ansible-user-sudoers.yml
+
+- name: Add ssh key for ansible user
+  ansible.builtin.import_tasks: auth_key-ansible-user.yml

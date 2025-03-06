@@ -1,0 +1,8 @@
+---
+- name: Play for init server
+  hosts: apps
+  vars_files:
+    - ./group_vars/production.yml
+  roles:
+    - { role: "base-config" }
+    - { role: "sshd-with-ports" }

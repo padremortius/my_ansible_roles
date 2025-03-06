@@ -1,0 +1,6 @@
+.ansible
+.vscode
+facts_cache/
+group_vars/*.yml
+inventory/*.ini
+ansible.cfg

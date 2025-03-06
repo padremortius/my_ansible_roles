@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: MIT-0
+galaxy_info:
+  author: Artem Misko
+  description: Role for bootstrap configuration (create new user for ansible, add user to sudoers, add ssh key)
+
+  license: MIT
+
+  min_ansible_version: "2.1"
+
+  galaxy_tags: []
+
+dependencies: [community.general.sudoers, ansible.posix.authorized_key]

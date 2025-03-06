@@ -1,0 +1,8 @@
+---
+- name: Start service
+  become: true
+  ansible.builtin.service:
+    name: "{{ item.service_name }}"
+    state: started
+    enabled: true
+  with_items: "{{ enabled_services }}"

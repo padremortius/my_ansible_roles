@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for sshd-with-ports
+- name: Disable include string
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "Include /etc/ssh/sshd_config.d/*.conf"
+    state: absent
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Deactivate PermitRootLogin
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PermitRootLogin no"
+    state: present
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Ensure PermitRootLogin is not enabled
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PermitRootLogin yes"
+    state: absent
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Deactivate PasswordAuthentication
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PasswordAuthentication no"
+    state: present
+  become_user: root
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Ensure PasswordAuthentication is not enabled
+  become: true
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PasswordAuthentication yes"
+    state: absent
+  become_user: root
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Activate PubkeyAuthentication
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PubkeyAuthentication yes"
+    state: present
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Ensure PubkeyAuthentication is not disabled
+  become: true
+  become_user: root
+  ansible.builtin.lineinfile:
+    path: "{{ item.path }}"
+    line: "PubkeyAuthentication no"
+    state: absent
+  with_items: "{{ sshd_config_path }}"
+  register: ssh_config
+
+- name: Change sshd port
+  ansible.builtin.import_tasks: change-port.yml
+
+- name: restart sshd
+  become: true
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  when: ssh_config.changed or desired_port_check is failed

@@ -1,0 +1,9 @@
+---
+users_details:
+  - { name: test_user, groups: "my_super_group", remove: false, passwd: "" }
+
+ssh_keys:
+  - { user: test_user, key: "ssh-ed25519 AAAAZ...", comment: test_user@computer.local }
+
+sshd_config_path: 
+  - { path: "/etc/ssh/sshd_config" }

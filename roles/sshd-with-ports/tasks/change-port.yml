@@ -1,0 +1,31 @@
+---
+- name: Check if ssh is running on {{ ssh_desired_port }}
+  ansible.builtin.wait_for:
+    port: "{{ ssh_desired_port }}"
+    host: "{{ ansible_host }}"
+    timeout: 10
+  ignore_errors: true
+  register: desired_port_check
+
+- name: check if ssh is running on {{ ssh_default_port }}
+  ansible.builtin.wait_for:
+    port: "{{ ssh_default_port }}"
+    host: "{{ ansible_host }}"
+    timeout: 10
+  ignore_errors: true
+  register: default_port_check
+
+- name: ssh port not found 
+  ansible.builtin.fail:
+    msg: "ssh is not running (or is running on an unknown port)"
+  when: default_port_check is failed and desired_port_check is failed
+
+- name: Setup alternate sshd port
+  become: true
+  ansible.builtin.lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "^Port"
+    line: "Port {{ ssh_desired_port }}"
+  with_items: "{{ sshd_config_path }}"
+  when: default_port_check is success
+  register: ssh_config

@@ -1,0 +1,5 @@
+---
+- name: Play for upgrade installed packages on servers
+  hosts: apps
+  roles:
+    - { role: "update-pkgs" }

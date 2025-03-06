@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for bootstrap-server
+- name: Disable IPv6
+  ansible.builtin.import_tasks: disable-ipv6.yml
+
+- name: Add users
+  ansible.builtin.import_tasks: add-user.yml
+
+- name: Add group to sudoers
+  ansible.builtin.import_tasks: sudoers-group.yml
+
+- name: Add sshkey for users
+  ansible.builtin.import_tasks: authkey-user.yml
+
+- name: Install base system soft
+  ansible.builtin.import_tasks: install-base-soft.yml
+
+- name: Configuration fail2ban
+  ansible.builtin.import_tasks: alpine-fail2ban.yml
+
+- name: Start and enabled services
+  ansible.builtin.import_tasks: service-enabled.yml

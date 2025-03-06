@@ -1,0 +1,11 @@
+---
+- name: Add user to sudoers without password needed
+  become: true
+  community.general.sudoers:
+    name: 00-wheel-users
+    commands: "{{ item.commands }}"
+    host: "{{ item.host }}"
+    group: "{{ item.group }}"
+    state: present
+    runas: "{{ item.runas }}"
+  with_items: "{{ sudoers_groups }}"

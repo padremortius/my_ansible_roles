@@ -1,0 +1,9 @@
+---
+ansible_user_details:
+  - { name: ansible, groups: "", remove: false, passwd: "" }
+
+ansible_ssh_keys:
+  - { user: ansible, key: "ssh-ed25519 AAAA.....", comment: ansible@computer.local }
+
+sshd_config_path: 
+  - { path: "/etc/ssh/sshd_config" }

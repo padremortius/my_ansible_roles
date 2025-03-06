@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for update-pkgs
+- name: Update Alpine package list
+  become: true
+  community.general.apk:
+    update_cache: true
+  when: ansible_distribution == 'Alpine'
+
+- name: Upgrade installed packages to latest version
+  become: true
+  community.general.apk:
+    upgrade: true
+  when: ansible_distribution == 'Alpine'

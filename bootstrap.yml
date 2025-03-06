@@ -1,0 +1,8 @@
+---
+
+- name: Play for bootstrap server
+  hosts: apps
+  vars_files:
+    - ./group_vars/bootstrap.yml
+  roles:
+    - { role: "bootstrap-server" }

@@ -1,0 +1,10 @@
+---
+- name: Add new ansible user for ansible
+  ansible.builtin.user:
+    append: true
+    create_home: true
+    groups: "{{ item.groups }}"
+    local: true
+    name: "{{ item.name }}"
+    password: "{{ item.passwd }}"
+  with_items: "{{ ansible_user_details }}"
