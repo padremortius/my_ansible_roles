@@ -16,26 +16,26 @@ Done tasks:
 
 ## Role bootstrap-server
 Done tasks:
-[X] Add new system user for ansible
-[X] Configuration sudoers for system user
-[X] Add ssh key for system user
+- [X] Add new system user for ansible
+- [X] Configuration sudoers for system user
+- [X] Add ssh key for system user
 
 ## Role sshd-with-ports
 Done tasks:
-[X] Configuration sshd
-    [X] отключается авторизация по паролю
-    [X] включается авторизация только по ключу
-    [X] disable auth root
-    [X] change sshd port
-    [X] restart sshd service if configuration changed
+- [X] Configuration sshd
+  - [X] отключается авторизация по паролю
+  - [X] включается авторизация только по ключу
+  - [X] disable auth root
+  - [X] change sshd port
+  - [X] restart sshd service if configuration changed
 
 ## Role update-pkgs
 Done tasks:
-[X] Update packages for Alpine Linux
+- [X] Update packages for Alpine Linux
 
 
 ### TODO Tasks
-[X] Add and configuration logrotate
-[X] Add and configuration failt2ban with sshd
-[ ] Add and configuration Docker
-[ ] Add and coniguration VPN-server
+- [X] Add and configuration logrotate
+- [X] Add and configuration failt2ban with sshd
+- [ ] Add and configuration Docker
+- [ ] Add and coniguration VPN-server
