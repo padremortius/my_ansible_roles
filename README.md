@@ -9,6 +9,7 @@
 ## Role base-config
 Done tasks:
 [X] Add/remove users
+[X] Add/remove user to groups
 [X] Add/remove ssh key for users
 [X] Turn off ipv6 and apply settings
 

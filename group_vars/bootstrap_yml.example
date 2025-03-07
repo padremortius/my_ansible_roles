@@ -1,6 +1,6 @@
 ---
 ansible_user_details:
-  - { name: ansible, groups: "", remove: false, passwd: "" }
+  - { name: ansible, remove: false, passwd: "" }
 
 ansible_ssh_keys:
   - { user: ansible, key: "ssh-ed25519 AAAA.....", comment: ansible@computer.local }

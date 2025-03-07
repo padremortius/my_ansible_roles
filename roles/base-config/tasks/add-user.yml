@@ -1,9 +1,7 @@
 ---
 - name: Add new user
   ansible.builtin.user:
-    append: true
     create_home: true
-    groups: "{{ item.groups }}"
     local: true
     name: "{{ item.name }}"
     password: "{{ item.passwd }}"

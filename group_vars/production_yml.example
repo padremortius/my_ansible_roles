@@ -1,9 +1,30 @@
 ---
-users_details:
-  - { name: test_user, groups: "my_super_group", remove: false, passwd: "" }
+enabled_services:
+  - { service_name: "fail2ban" }
+
+fail2ban_sshd_maxretries: 3
+fail2ban_sshd_bantime: 1h
+fail2ban_sshd_ddos_maxretries: 10
+
+soft_list:
+  - { name: "fail2ban" }
+  - { name: "logrotate" }
+  - { name: "ufw" }
+  - { name: "iptables" } 
+
+ssh_desired_port: 8222
 
 ssh_keys:
   - { user: test_user, key: "ssh-ed25519 AAAAZ...", comment: test_user@computer.local }
 
 sshd_config_path: 
   - { path: "/etc/ssh/sshd_config" }
+
+sudoers_groups:
+  - { group: "my_super_group", commands: ALL, host: ALL, runas: ALL }
+
+users_details:
+  - { name: test_user, remove: false, passwd: "" }
+
+user_groups:
+  - { user: padremortius, groups: "wheel" }

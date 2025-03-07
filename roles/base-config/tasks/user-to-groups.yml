@@ -1,0 +1,8 @@
+---
+- name: Add existing user {{ item.user }} to groups
+  ansible.builtin.user:
+    name: "{{ item.user }}"
+    groups: "{{ item.groups }}"
+    append: yes
+  with_items: "{{ user_groups }}"
+    
