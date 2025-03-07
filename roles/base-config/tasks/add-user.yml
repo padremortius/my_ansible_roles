@@ -1,6 +1,5 @@
 ---
 - name: Add new user
-  become: true
   ansible.builtin.user:
     append: true
     create_home: true

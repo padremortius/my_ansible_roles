@@ -1,7 +1,5 @@
 ---
 - name: Add user to sudoers without password needed
-  become: true
-  become_user: root
   community.general.sudoers:
     name: 00-ansible-users
     commands: ALL

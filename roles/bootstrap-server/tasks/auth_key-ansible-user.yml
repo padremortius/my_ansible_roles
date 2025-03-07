@@ -1,7 +1,5 @@
 ---
 - name: Add ssh key to user
-  become: true
-  become_user: root
   ansible.posix.authorized_key:
     key: "{{ item.key }}"
     user: "{{ item.user }}"

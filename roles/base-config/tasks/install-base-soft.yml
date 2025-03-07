@@ -1,6 +1,5 @@
 ---
 - name: Install base softs
-  become: true
   ansible.builtin.package:
     name: "{{ item.name }}"
     state: present

@@ -1,6 +1,5 @@
 ---
 - name: Configuration jail.d/alpine-ssh.conf
-  become: true
   community.general.ini_file:
     backup: true
     path: /etc/fail2ban/jail.d/alpine-ssh.conf

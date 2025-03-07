@@ -1,6 +1,7 @@
 ---
 - name: Play for init server
   hosts: apps
+  become: true
   vars_files:
     - ./group_vars/production.yml
   roles:

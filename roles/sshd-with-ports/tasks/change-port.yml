@@ -21,7 +21,6 @@
   when: default_port_check is failed and desired_port_check is failed
 
 - name: Setup alternate sshd port
-  become: true
   ansible.builtin.lineinfile:
     dest: "/etc/ssh/sshd_config"
     regexp: "^Port"

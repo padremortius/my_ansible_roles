@@ -1,6 +1,5 @@
 ---
 - name: Start service
-  become: true
   ansible.builtin.service:
     name: "{{ item.service_name }}"
     state: started
