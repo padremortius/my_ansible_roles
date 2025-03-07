@@ -60,7 +60,7 @@
 - name: Change sshd port
   ansible.builtin.import_tasks: change-port.yml
 
-- name: restart sshd
+- name: Restart sshd
   ansible.builtin.service:
     name: sshd
     state: restarted

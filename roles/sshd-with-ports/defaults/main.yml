@@ -1,3 +1,4 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # defaults file for sshd-with-ports
+ssh_default_port: 22
