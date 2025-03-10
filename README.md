@@ -12,7 +12,8 @@ Done tasks:
 [X] Add/remove user to groups
 [X] Add/remove ssh key for users
 [X] Turn off ipv6 and apply settings
-
+[X] Install software
+[X] Configure UFW for sshd
 
 ## Role bootstrap-server
 Done tasks:

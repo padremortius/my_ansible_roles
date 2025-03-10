@@ -24,3 +24,6 @@
 
 - name: Add existing user to groups
   ansible.builtin.import_tasks: user-to-groups.yml
+
+- name: Add settings for UFW
+  ansible.builtin.import_tasks: ufw.yml

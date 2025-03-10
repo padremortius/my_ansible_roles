@@ -1,0 +1,19 @@
+---
+- name: Set default policy
+  community.general.ufw:
+    default: reject
+
+- name: Allow everything and enable UFW
+  community.general.ufw:
+    state: enabled
+    policy: allow
+
+- name: Set logging
+  community.general.ufw:
+    logging: 'on'
+
+- name: Add rate limit for ssh port
+  community.general.ufw:
+    rule: limit
+    port: "{{ ssh_desired_port }}"
+    proto: tcp
