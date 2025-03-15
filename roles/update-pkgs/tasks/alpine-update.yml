@@ -1,0 +1,8 @@
+---
+- name: Update Alpine package list
+  community.general.apk:
+    update_cache: true
+
+- name: Upgrade installed packages to latest version
+  community.general.apk:
+    upgrade: true

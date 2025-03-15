@@ -1,12 +1,10 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # tasks file for update-pkgs
-- name: Update Alpine package list
-  community.general.apk:
-    update_cache: true
+- name: Update list packages and upgrade apk packages
+  ansible.builtin.import_tasks: alpine-update.yml
   when: ansible_distribution == 'Alpine'
 
-- name: Upgrade installed packages to latest version
-  community.general.apk:
-    upgrade: true
-  when: ansible_distribution == 'Alpine'
+- name: Update list packages and upgrade deb packages
+  ansible.builtin.import_tasks: debian-update.yml
+  when: ansible_distribution == 'Debian'

@@ -1,0 +1,8 @@
+---
+- name: Update deb package list
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Upgrade installed deb packages to latest version
+  ansible.builtin.apt:
+    upgrade: true
