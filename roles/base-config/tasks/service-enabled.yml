@@ -4,4 +4,4 @@
     name: "{{ item.service_name }}"
     state: started
     enabled: true
-  with_items: "{{ enabled_services }}"
+  with_items: "{{ enabled_services | default([])}}"
