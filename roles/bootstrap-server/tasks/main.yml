@@ -2,7 +2,7 @@
 ---
 # tasks file for bootstrap-server
 - name: Add new ansible user
-  ansible.builtin.import_tasks: add-ansible-user.yml
+  ansible.builtin.import_tasks: add-user.yml
 
 - name: Add system user to sudoers
   ansible.builtin.import_tasks: ansible-user-sudoers.yml
