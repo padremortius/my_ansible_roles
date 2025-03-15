@@ -12,3 +12,4 @@
     label: "{{ item.option }}"
   notify:
     - Restart fail2ban
+ 
