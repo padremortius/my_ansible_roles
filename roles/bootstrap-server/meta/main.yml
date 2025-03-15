@@ -9,4 +9,4 @@ galaxy_info:
 
   galaxy_tags: []
 
-dependencies: [community.general.sudoers, ansible.posix.authorized_key]
+dependencies: []
