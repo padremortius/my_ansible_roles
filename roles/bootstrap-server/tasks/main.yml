@@ -9,3 +9,7 @@
 
 - name: Add ssh key for ansible user
   ansible.builtin.import_tasks: auth_key-ansible-user.yml
+
+- name: Add boot message for logged users
+  ansible.builtin.import_tasks: boot-msg.yml
+  when: ansible_distribution == 'Alpine'

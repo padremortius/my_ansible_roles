@@ -1,0 +1,9 @@
+---
+- name: Add boot message for logged users
+  ansible.builtin.copy:
+    backup: true
+    src: templates/motd.example
+    dest: /etc/motd
+    mode: u=rw,g=r,o=r
+    owner: root
+    group: root
