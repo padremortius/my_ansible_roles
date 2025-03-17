@@ -31,5 +31,9 @@
   ansible.builtin.import_tasks: ufw.yml
   when: "'ufw' in ansible_facts.packages"
 
+- name: Add settings for podman
+  ansible.builtin.import_tasks: alpine-podman.yml
+  when: ansible_distribution == 'Alpine' and 'podman' in ansible_facts.packages
+
 - name: Start and enabled services
   ansible.builtin.import_tasks: service-enabled.yml

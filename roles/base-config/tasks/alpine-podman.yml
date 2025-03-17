@@ -1,0 +1,37 @@
+---
+- name: Add podman user to /etc/subuid
+  ansible.builtin.lineinfile:
+    dest: /etc/subuid
+    line: "{{ podman_user }}:100000:65536"
+    state: present
+    insertafter: EOF
+    mode: u=rw,g=r,o=r
+
+- name: Add podman user to /etc/subgid
+  ansible.builtin.lineinfile:
+    dest: /etc/subgid
+    line: "{{ podman_user }}:100000:65536"
+    state: present
+    insertafter: EOF
+    mode: u=rw,g=r,o=r
+
+- name: Add shared to root mount point
+  ansible.builtin.replace:
+    path: /etc/fstab
+    regexp: "rw,relatime 0 1"
+    replace: "rw,relatime,shared 0 1"
+    backup: true
+
+- name: Add kernel module ip_tables
+  ansible.builtin.lineinfile:
+    dest: /etc/modules
+    line: "ip_tables"
+    state: present
+    insertafter: EOF
+
+- name: Add kernel module tun
+  ansible.builtin.lineinfile:
+    dest: /etc/modules
+    line: "tun"
+    state: present
+    insertafter: EOF
