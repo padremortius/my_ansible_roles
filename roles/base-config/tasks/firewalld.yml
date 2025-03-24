@@ -1,0 +1,23 @@
+---
+# - name: Add services to firewalld
+#   ansible.builtin.firewalld:
+#     zone: "{{ item.zone }}"
+#     service: "{{ item.service }}"
+#     state: "{{ item.state }}"
+#     permanent: "{{ item.permanent }}"
+#     offline: "{{ item.offline }}"
+#     immediate: "{{ item.immediate }}"
+#   with_items: "{{ firewalld_services }}"
+#   when: "'firewalld_services' is defined"
+- name: Add ports to firewalld
+  ansible.builtin.firewalld:
+    zone: "{{ item.zone }}"
+    port: "{{ item.port }}"
+    state: "{{ item.state }}"
+    permanent: "{{ item.permanent }}"
+  with_items: "{{ firewalld_ports }}"
+
+- name: Service firewalld reload
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded

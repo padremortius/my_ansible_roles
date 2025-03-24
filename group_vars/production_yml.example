@@ -2,20 +2,26 @@
 enabled_services:
   - { service_name: "fail2ban" }
 
-fail2ban_sshd_maxretries: 3
-fail2ban_sshd_bantime: 1h
-fail2ban_sshd_ddos_maxretries: 10
+fail2ban_banaction: firewallcmd-rich-rules[actiontype=<multiport>]
+fail2ban_banaction_allports: firewallcmd-rich-rules[actiontype=<allports>]
+
+fail2ban_bantime: 1h
+fail2ban_maxretry: 3
+
+firewalld_ports:
+  - { zone: public, port: 22/tcp, state: enabled, permanent: true }
+  - { zone: public, port: 55555/udp, state: enabled, permanent: true }
 
 soft_list:
   - { name: "fail2ban" }
   - { name: "logrotate" }
   - { name: "ufw" }
-  - { name: "iptables" } 
-
-ssh_desired_port: 8222
+  - { name: "iptables" }
 
 sshd_config_path:
   - { path: "/etc/ssh/sshd_config" }
+
+ssh_desired_port: 8222
 
 sudoers_groups:
   - { group: "my_super_group", commands: ALL, host: ALL, runas: ALL }
