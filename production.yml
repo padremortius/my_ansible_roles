@@ -6,4 +6,3 @@
     - ./group_vars/production.yml
   roles:
     - { role: "base-config" }
-    - { role: "sshd-with-ports" }

@@ -1,5 +1,4 @@
 ---
-
 - name: Play for bootstrap server
   hosts: apps
   become: true
@@ -7,3 +6,4 @@
     - ./group_vars/bootstrap.yml
   roles:
     - { role: "bootstrap-server" }
+    - { role: "sshd-with-ports" }
