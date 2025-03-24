@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # vars file for sshd-with-ports
-ssh_default:
- - ssh_default_port = 22
- - ssh_desired_port = 2222
+sshd_config_path: "/etc/ssh/sshd_config"
+ssh_desired_port: 8222

@@ -3,58 +3,51 @@
 # tasks file for sshd-with-ports
 - name: Disable include string
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "Include /etc/ssh/sshd_config.d/*.conf"
     state: absent
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Deactivate PermitRootLogin
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PermitRootLogin no"
     state: present
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Ensure PermitRootLogin is not enabled
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PermitRootLogin yes"
     state: absent
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Deactivate PasswordAuthentication
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PasswordAuthentication no"
     state: present
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Ensure PasswordAuthentication is not enabled
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PasswordAuthentication yes"
     state: absent
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Activate PubkeyAuthentication
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PubkeyAuthentication yes"
     state: present
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Ensure PubkeyAuthentication is not disabled
   ansible.builtin.lineinfile:
-    path: "{{ item.path }}"
+    path: "{{ sshd_config_path }}"
     line: "PubkeyAuthentication no"
     state: absent
-  with_items: "{{ sshd_config_path }}"
   register: ssh_config
 
 - name: Change sshd port
