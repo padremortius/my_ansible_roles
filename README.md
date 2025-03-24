@@ -38,5 +38,6 @@ Done tasks:
 ### TODO Tasks
 - [X] Add and configuration logrotate
 - [X] Add and configuration failt2ban with sshd
-- [ ] Add and configuration Docker
+- [X] Add and configuration Docker
+- [X] Add and configuration Podman
 - [ ] Add and coniguration VPN-server
