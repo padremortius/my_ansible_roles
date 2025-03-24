@@ -1,7 +1,12 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # handlers file for base-config
-- name: Restrta fail2ban
+- name: Restart fail2ban
   ansible.builtin.service:
     name: fail2ban
+    state: restarted
+
+- name: Restart ufw
+  ansible.builtin.service:
+    name: ufw
     state: restarted
