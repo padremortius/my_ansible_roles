@@ -14,10 +14,7 @@ soft_list:
 
 ssh_desired_port: 8222
 
-ssh_keys:
-  - { user: test_user, key: "ssh-ed25519 AAAAZ...", comment: test_user@computer.local }
-
-sshd_config_path: 
+sshd_config_path:
   - { path: "/etc/ssh/sshd_config" }
 
 sudoers_groups:
@@ -28,3 +25,6 @@ users_details:
 
 user_groups:
   - { user: padremortius, groups: "wheel" }
+
+user_ssh_keys:
+  - { user: test_user, key: "ssh-ed25519 AAAAZ...", comment: test_user@computer.local }

@@ -5,4 +5,4 @@
     user: "{{ item.user }}"
     comment: "{{ item.comment }}"
     manage_dir: true
-  with_items: "{{ ssh_keys }}"
+  with_items: "{{ user_ssh_keys }}"
