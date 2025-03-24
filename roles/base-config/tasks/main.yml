@@ -2,7 +2,7 @@
 ---
 # tasks file for bootstrap-server
 - name: Disable IPv6
-  ansible.builtin.import_tasks: disable-ipv6.yml
+  ansible.builtin.import_tasks: sysctl-params.yml
 
 - name: Add users
   ansible.builtin.import_tasks: add-user.yml
