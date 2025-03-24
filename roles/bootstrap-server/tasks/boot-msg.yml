@@ -1,9 +1,19 @@
 ---
+- name: Check boot message
+  ansible.builtin.shell: grep -c "^Ansible" /etc/motd ||true
+  register: update_not_need
+
 - name: Add boot message for logged users
-  ansible.builtin.copy:
+  ansible.builtin.lineinfile:
     backup: true
-    src: templates/motd.example
-    dest: /etc/motd
-    mode: u=rw,g=r,o=r
-    owner: root
-    group: root
+    path: /etc/motd
+    insertafter: EOF
+    state: present
+    line: |
+
+      |============================|
+      |                            |
+      |  Managed by Ansible roles  |
+      |                            |
+      |============================|
+  when: update_not_need.stdout == 0
