@@ -1,13 +1,13 @@
 ---
-- name: Configuration jail.d/alpine-ssh.conf
+- name: Configuration jail.local
   community.general.ini_file:
     backup: true
-    path: /etc/fail2ban/jail.d/alpine-ssh.conf
+    path: /etc/fail2ban/jail.local
     section: "{{ item.section }}"
     option: "{{ item.option }}"
     value: "{{ item.value }}"
     mode: "0640"
-  loop: "{{ fail2ban_alpine_sshd_configuration + fail2ban_alpine_sshd_ddos_configuration }}"
+  loop: "{{ fail2ban_default_option + fail2ban_sshd_option }}"
   loop_control:
     label: "{{ item.option }}"
   notify:

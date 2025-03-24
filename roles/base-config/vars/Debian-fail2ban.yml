@@ -18,7 +18,7 @@ fail2ban_default_option:
     value: "{{ fail2ban_banaction_allports }}"
     section: DEFAULT
   - option: backend
-    value: auto
+    value: systemd
     section: DEFAULT
   - option: allowipv6
     value: false
@@ -28,18 +28,6 @@ fail2ban_sshd_option:
   - option: enabled
     value: true
     section: sshd
-  - option: filter
-    value: alpine-sshd
-    section: sshd
   - option: port
     value: "{{ ssh_desired_port }}"
-    section: sshd
-  - option: logpath
-    value: /var/log/messages
-    section: sshd
-  - option: maxretry
-    value: "{{ fail2ban_sshd_maxretries }}"
-    section: sshd
-  - option: bantime
-    value: "{{ fail2ban_sshd_bantime }}"
     section: sshd
