@@ -12,4 +12,3 @@
 
 - name: Add boot message for logged users
   ansible.builtin.import_tasks: boot-msg.yml
-  when: ansible_distribution == 'Alpine'
