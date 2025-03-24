@@ -16,6 +16,9 @@
 - name: Add sshkey for users
   ansible.builtin.import_tasks: authkey-user.yml
 
+- name: Add apt repos
+  ansible.builtin.import_tasks: apt.yml
+
 - name: Gather the package facts
   ansible.builtin.package_facts:
     manager: auto
@@ -23,17 +26,29 @@
 - name: Install base system soft
   ansible.builtin.import_tasks: install-base-soft.yml
 
+- name: Load OS-specific vars
+  ansible.builtin.include_vars: "vars/{{ ansible_distribution }}-fail2ban.yml"
+
 - name: Configuration fail2ban
-  ansible.builtin.import_tasks: alpine-fail2ban.yml
-  when: ansible_distribution == 'Alpine' and 'fail2ban' in ansible_facts.packages
+  ansible.builtin.import_tasks: fail2ban.yml
+  when: "'fail2ban' in ansible_facts.packages"
 
 - name: Add settings for UFW
   ansible.builtin.import_tasks: ufw.yml
   when: "'ufw' in ansible_facts.packages"
 
+- name: Add settings for firewalld
+  ansible.builtin.import_tasks: firewalld.yml
+  when: "'firewalld' in ansible_facts.packages"
+
 - name: Add settings for podman
   ansible.builtin.import_tasks: alpine-podman.yml
   when: ansible_distribution == 'Alpine' and 'podman' in ansible_facts.packages
 
+- name: Install docker and docker-compose
+  ansible.builtin.import_tasks: debian-docker.yml
+  when: ansible_distribution == 'Debian'
+
 - name: Start and enabled services
   ansible.builtin.import_tasks: service-enabled.yml
+  when: enabled_services is defined

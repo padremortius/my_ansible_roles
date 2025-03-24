@@ -1,3 +1,4 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # vars file for bootstrap-server
+docker_keyring: /etc/apt/keyrings/docker.asc
