@@ -1,0 +1,5 @@
+---
+tg_bot_token: "bot_token"
+tg_chat_id: "user_id"
+
+pam_event_script_url: "/usr/local/bin/tgalert.sh"

@@ -1,0 +1,8 @@
+---
+- name: Play for install pam-events
+  become: true
+  hosts: apps
+  vars_files:
+    - ./group_vars/pam-events.yml
+  roles:
+    - { role: "pam-events" }
