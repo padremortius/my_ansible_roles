@@ -16,9 +16,6 @@
 - name: Add sshkey for users
   ansible.builtin.import_tasks: authkey-user.yml
 
-- name: Add apt repos
-  ansible.builtin.import_tasks: apt.yml
-
 - name: Gather the package facts
   ansible.builtin.package_facts:
     manager: auto
