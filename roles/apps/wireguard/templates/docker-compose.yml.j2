@@ -1,0 +1,26 @@
+services:
+  wireguard:
+    image: {{ image_url }}
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SERVERURL={{ wg_host }}
+      - SERVERPORT={{ wg_port }}
+      - PEERS=5 #optional
+      - PEERDNS=auto #optional
+      - ALLOWEDIPS=0.0.0.0/0 #optional
+      - PERSISTENTKEEPALIVE_PEERS= #optional
+      - LOG_CONFS=true #optional
+    volumes:
+      - ./config:/config
+      - /lib/modules:/lib/modules
+    ports:
+      - {{ wg_port }}:{{ wg_port }}/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    restart: unless-stopped

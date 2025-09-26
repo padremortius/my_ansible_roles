@@ -16,3 +16,9 @@ tasks:
       my_hosts: "{{index .MATCH 0}}"
     cmds:
       - ansible-playbook -i inventory/{{ .my_hosts }}.ini upgrade.yml
+
+  wg:*:
+    vars:
+      my_hosts: "{{index .MATCH 0}}"
+    cmds:
+      - ansible-playbook -i inventory/{{ .my_hosts }}.ini wireguard.yml

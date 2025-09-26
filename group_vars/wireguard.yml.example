@@ -1,0 +1,10 @@
+---
+admin_email: name@domain.com
+image_url: linuxserver/wireguard:1.0.20250521
+wg_workdir: /opt/wireguard
+wg_init_enabled: true
+wg_admin_username: admin_username
+wg_admin_password: "your_big_secret_password"
+wg_port: 51820
+wg_ui_port: 51821
+wg_host: vpn.domain.com

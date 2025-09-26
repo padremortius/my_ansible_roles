@@ -1,0 +1,8 @@
+---
+- name: Play for install wireguard
+  become: true
+  hosts: apps
+  vars_files:
+    - ./group_vars/wireguard.yml
+  roles:
+    - { role: "apps/wireguard" }

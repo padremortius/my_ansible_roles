@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for install wireguard
+- name: Create folders
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ wg_workdir }}"
+    - "{{ wg_workdir }}/config"
+    - "{{ wg_workdir }}/backup"
+
+- name: Stop docker container
+  ansible.builtin.shell:
+    chdir: "{{ wg_workdir }}"
+    cmd: "docker-compose stop"
+
+- name: Erase all unused docker items
+  ansible.builtin.shell: "docker system prune -af"
+
+- name: Backup configuration
+  ansible.builtin.shell:
+    chdir: "{{ wg_workdir }}"
+    cmd: "tar czfv backup/config-$(date -u +'%Y-%m-%d').tar.gz ./config docker-compose.yml"
+
+- name: Update compose files
+  ansible.builtin.template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ wg_workdir }}/docker-compose.yml"
+    mode: "0755"
+
+- name: Update docker containers
+  ansible.builtin.shell:
+    chdir: "{{ wg_workdir }}"
+    cmd: "docker-compose pull"
+
+- name: Start docker container as service
+  ansible.builtin.shell:
+    chdir: "{{ wg_workdir }}"
+    cmd: "docker-compose up -d"
