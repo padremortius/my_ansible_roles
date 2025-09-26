@@ -8,3 +8,6 @@
 - name: Update list packages and upgrade deb packages
   ansible.builtin.import_tasks: debian-update.yml
   when: ansible_distribution == 'Debian'
+
+- name: Reboot machine
+  ansible.builtin.reboot:
