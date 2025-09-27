@@ -1,0 +1,31 @@
+---
+- name: Check docker logger configuration
+  ansible.builtin.shell: "grep -c \"log-driver\" /etc/docker/daemon.json || true"
+  register: update_not_need
+
+- name: Configure docker logger
+  ansible.builtin.lineinfile:
+    path: /etc/docker/daemon.json
+    line: |
+      {
+        "log-driver": "json-file",
+        "log-opts": {
+          "max-size": "10m",
+          "max-file": "3"
+        }
+      }
+    mode: '0644'
+    create: true
+  when: update_not_need.stdout == 0
+
+- name: Stop docker daemon
+  ansible.builtin.service:
+    name: docker
+    state: stopped
+  when: update_not_need.stdout == 0
+
+- name: Start docker daemon
+  ansible.builtin.service:
+    name: docker
+    state: started
+  when: update_not_need.stdout == 0

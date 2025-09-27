@@ -1,0 +1,6 @@
+---
+- name: Play for install docker
+  become: true
+  hosts: apps
+  roles:
+    - { role: "docker" }

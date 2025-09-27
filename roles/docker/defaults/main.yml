@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: MIT-0
+---
+# defaults file for docker
+docker_keyring: /etc/apt/keyrings/docker.asc

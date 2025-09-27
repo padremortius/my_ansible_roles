@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for docker
+- name: Add apt repos
+  ansible.builtin.import_tasks: debian-apt.yml
+  when: ansible_distribution == 'Debian'
+
+- name: Install packages
+  ansible.builtin.import_tasks: debian-packages.yml
+  when: ansible_distribution == 'Debian'

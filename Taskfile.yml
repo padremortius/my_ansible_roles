@@ -11,6 +11,12 @@ tasks:
       - echo "{{.GREETING}}"
     silent: true
 
+  docker:*:
+    vars:
+      my_hosts: "{{index .MATCH 0}}"
+    cmds:
+      - ansible-playbook -i inventory/{{ .my_hosts }}.ini docker.yml
+
   upgrade:*:
     vars:
       my_hosts: "{{index .MATCH 0}}"
