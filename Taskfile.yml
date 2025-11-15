@@ -2,41 +2,23 @@
 
 version: "3"
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
   default:
     cmds:
-      - echo "{{.GREETING}}"
+      - echo "For start pipeline start in shell 'task run:<role_name>:<inventory_file_without_ext>'"
+      - echo "Current ansible roles"
+      - echo " - bootstrap"
+      - echo " - docker"
+      - echo " - pam-events"
+      - echo " - production"
+      - echo " - test"
+      - echo " - upgrade"
+      - echo " - wg"
     silent: true
 
-  docker:*:
+  run:*:*:
     vars:
-      my_hosts: "{{index .MATCH 0}}"
+      my_hosts: "{{index .MATCH 1}}"
+      my_role: "{{index .MATCH 0}}"
     cmds:
-      - ansible-playbook -i inventory/{{ .my_hosts }}.ini docker.yml
-
-  upgrade:*:
-    vars:
-      my_hosts: "{{index .MATCH 0}}"
-    cmds:
-      - ansible-playbook -i inventory/{{ .my_hosts }}.ini upgrade.yml
-
-  pam-events:*:
-    vars:
-      my_hosts: "{{index .MATCH 0}}"
-    cmds:
-      - ansible-playbook -i inventory/{{ .my_hosts }}.ini pam-events.yml
-
-  test:*:
-    vars:
-      my_hosts: "{{index .MATCH 0}}"
-    cmds:
-      - ansible-playbook -i inventory/{{ .my_hosts }}.ini test.yml
-
-  wg:*:
-    vars:
-      my_hosts: "{{index .MATCH 0}}"
-    cmds:
-      - ansible-playbook -i inventory/{{ .my_hosts }}.ini wireguard.yml
+      - ansible-playbook -i inventory/{{ .my_hosts }}.ini {{ .my_role }}.yml

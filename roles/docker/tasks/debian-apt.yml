@@ -1,18 +1,26 @@
 ---
-
-- name: Calculate server architecture
-  ansible.builtin.shell: dpkg --print-architecture
-  register: arch
-
 - name: Add PGP key to apt
   ansible.builtin.get_url:
     url: https://download.docker.com/linux/debian/gpg
     dest: "{{ docker_keyring }}"
     mode: '0644'
 
+- name: Remove old file
+  ansible.builtin.file:
+    dest: /etc/apt/sources.list.d/docker.list
+    state: absent
+
 - name: Add docker repository to apt
-  ansible.builtin.apt_repository:
-    filename: docker
-    repo: "deb [arch={{ arch.stdout | trim }} signed-by={{ docker_keyring }}] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+  ansible.builtin.lineinfile:
+    dest: /etc/apt/sources.list.d/docker.sources
+    create: true
+    regexp: '^{{ item.property }}:'
+    line: "{{ item.property }}:{{ item.value }}"
     state: present
-    update_cache: true
+    mode: '0644'
+  loop:
+    - { property: 'Types', value: 'deb' }
+    - { property: 'URIs', value: '{{ docker_repo_url }}' }
+    - { property: 'Suites', value: '{{ ansible_distribution_release }}' }
+    - { property: 'Components', value: 'stable' }
+    - { property: 'Signed-By', value: '{{ docker_keyring }}' }

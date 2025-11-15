@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MIT-0
 ---
 # defaults file for docker
-docker_keyring: /etc/apt/keyrings/docker.asc
+docker_keyring: /etc/apt/trusted.gpg.d/docker.asc
+docker_repo_url: https://download.docker.com/linux/debian
