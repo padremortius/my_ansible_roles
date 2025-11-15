@@ -42,10 +42,6 @@
   ansible.builtin.import_tasks: alpine-podman.yml
   when: ansible_distribution == 'Alpine' and 'podman' in ansible_facts.packages
 
-- name: Install docker and docker-compose
-  ansible.builtin.import_tasks: debian-docker.yml
-  when: ansible_distribution == 'Debian'
-
 - name: Start and enabled services
   ansible.builtin.import_tasks: service-enabled.yml
   when: enabled_services is defined
