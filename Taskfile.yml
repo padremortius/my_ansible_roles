@@ -29,6 +29,12 @@ tasks:
     cmds:
       - ansible-playbook -i inventory/{{ .my_hosts }}.ini pam-events.yml
 
+  test:*:
+    vars:
+      my_hosts: "{{index .MATCH 0}}"
+    cmds:
+      - ansible-playbook -i inventory/{{ .my_hosts }}.ini test.yml
+
   wg:*:
     vars:
       my_hosts: "{{index .MATCH 0}}"

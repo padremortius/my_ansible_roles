@@ -1,0 +1,6 @@
+---
+- name: Play for tests connection to servers
+  hosts: apps
+  gather_facts: true
+  roles:
+    - { role: "test" }
