@@ -9,5 +9,10 @@
   ansible.builtin.import_tasks: debian-update.yml
   when: ansible_distribution == 'Debian'
 
-- name: Reboot machine
-  ansible.builtin.reboot:
+# - name: Reboot machine
+#   ansible.builtin.reboot:
+#     test_command: whoami
+
+- name: Print current release
+  ansible.builtin.debug:
+    msg: "Hostname: {{ ansible_hostname }}, OS version: {{ ansible_lsb.id }} {{ ansible_lsb.major_release }}.{{ ansible_lsb.release }}"

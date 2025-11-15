@@ -3,6 +3,15 @@
   ansible.builtin.apt:
     update_cache: true
 
+- name: "Get list of updated packages"
+  ansible.builtin.command:
+    cmd: "apt list --upgradable"
+  register: result
+
 - name: Upgrade installed deb packages to latest version
   ansible.builtin.apt:
     upgrade: true
+
+- name: Print list of updated packages
+  ansible.builtin.debug:
+    var: result.stdout_lines
