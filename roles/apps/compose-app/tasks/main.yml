@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for install forgejo
+- name: Create folders
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ directories_to_create }}"
+
+- name: Check if docker-compose.yml is exists
+  ansible.builtin.stat:
+    path: "{{ workdir }}/docker-compose.yml"
+  register: compose_check
+
+- name: Stop docker container
+  ansible.builtin.command:
+    chdir: "{{ workdir }}"
+    cmd: "docker compose stop"
+  when: compose_check.stat.exists
+
+- name: Erase all unused docker items
+  ansible.builtin.command: "docker system prune -af"
+
+- name: Backup configuration
+  ansible.builtin.archive:
+    dest: "{{ workdir }}/backup/bck-{{ now(utc=true, fmt='%Y-%m-%d %H:%M:%S') }}.tar.gz"
+    format: gz
+    path: "{{ backup_items }}"
+  when: compose_check.stat.exists
+
+- name: Update compose files
+  ansible.builtin.template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ workdir }}/docker-compose.yml"
+    mode: "0755"
+
+- name: Update docker containers
+  ansible.builtin.command:
+    chdir: "{{ workdir }}"
+    argv:
+      - "docker"
+      - "compose"
+      - "pull"
+
+- name: Start docker container as service
+  ansible.builtin.command:
+    chdir: "{{ workdir }}"
+    argv:
+      - "docker"
+      - "compose"
+      - "up"
+      - "-d"

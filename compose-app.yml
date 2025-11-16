@@ -1,0 +1,8 @@
+---
+- name: Play for install application with docker-compose file
+  become: true
+  hosts: apps
+  vars_files:
+    - ./group_vars/compose-app.yml
+  roles:
+    - { role: "apps/compose-app" }

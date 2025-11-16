@@ -1,0 +1,25 @@
+services:
+  {{ service_name }}:
+    image: {{ docker_image_url }}
+    cap_add:
+{% for item in capadd_list %}
+      - {{ item }}
+{% endfor %}
+    container_name: {{ service_name }}
+    environment:
+{% for item in env_list %}
+      - {{ item.key }}={{ item.value }}
+{% endfor %}
+    sysctls:
+{% for item in sysctl_params %}
+      - {{ item.name }}={{ item.value }}
+{% endfor %}
+    volumes:
+{% for item in volume_list %}
+      - {{ item.folder_in }}:{{ item.folder_out }}
+{% endfor %}
+    ports:
+{% for item in port_list %}
+      - {{ item.port_host }}:{{ item.port_container }}/{{ item.port_type }}
+{% endfor %}
+    restart: unless-stopped
