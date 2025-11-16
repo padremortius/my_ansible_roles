@@ -1,0 +1,8 @@
+---
+- name: Play for install portainer
+  become: true
+  hosts: apps
+  vars_files:
+    - ./group_vars/forgejo.yml
+  roles:
+    - { role: "apps/compose-app" }
